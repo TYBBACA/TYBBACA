@@ -120,50 +120,6 @@ Java
 .NET
 Q.2 Dot Net Framework:
 
-A) VB.Net Program to Move Text "Pune University" (Left to Right and Vice Versa):
-
-Steps to Run on Visual Studio 2010:
-
-Open Visual Studio 2010: Launch Visual Studio 2010.
-
-Create New Project:
-
-Go to File -> New -> Project....
-
-In the New Project dialog:
-
-Under Installed Templates, select Visual Basic.
-
-Choose Windows Forms Application.
-
-Give a Name (e.g., MovingTextVB) and Location for your project.
-
-Click OK.
-
-Design the Form:
-
-In the Form1.vb [Design] view:
-
-Drag and drop a Label control from the Toolbox onto the form.
-
-Set its Text property to "Pune University".
-
-Set its AutoSize property to True.
-
-Name it lblText (optional, but good practice).
-
-Drag and drop a Timer control from the Toolbox onto the form. It will appear in the component tray below the form.
-
-Name it tmrMoveText (optional).
-
-Set its Interval property to 50 (adjust for speed, lower value for faster movement).
-
-Set its Enabled property to True.
-
-Write the Code:
-
-Double-click on the Timer control on the form (or right-click and select View Code). This will open the Form1.vb code editor and create the tmrMoveText_Tick event handler.
-
 Paste the following VB.Net code into Form1.vb:
 
 Public Class Form1
@@ -202,32 +158,7 @@ Public Class Form1
         End If
     End Sub
 End Class
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Vb.net
-IGNORE_WHEN_COPYING_END
-
 B) C#.Net Program to Create Department Hierarchy:
-
-Steps to Run on Visual Studio 2010:
-
-Open Visual Studio 2010: Launch Visual Studio 2010.
-
-Create New Project:
-
-Go to File -> New -> Project....
-
-In the New Project dialog:
-
-Under Installed Templates, select Visual C#.
-
-Choose Console Application.
-
-Give a Name (e.g., DepartmentHierarchy) and Location for your project.
-
-Click OK.
 
 Write the Code:
 
@@ -344,19 +275,6 @@ namespace DepartmentHierarchy
         }
     }
 }
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-C#
-IGNORE_WHEN_COPYING_END
-
-Run the Program:
-
-Press Ctrl + F5 (Start Without Debugging) or F5 (Start Debugging) to run the program.
-
-The program will prompt you to enter details for Sales and HR departments, and then display the entered details.
-
 Solution (C#.Net):
 
 using System;
