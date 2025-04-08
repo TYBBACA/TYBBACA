@@ -1,10 +1,3 @@
-Certainly, let's solve both questions step-by-step with clear instructions to run them.
-
-Question A: Socket Program for Prime Number Check
-
-Solution:
-
-Here are the Java programs for the server (PrimeServer.java) and client (PrimeClient.java).
 
 1. PrimeServer.java (Server-side)
 
@@ -88,53 +81,7 @@ public class PrimeClient {
         }
     }
 }
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Java
-IGNORE_WHEN_COPYING_END
 
-Steps to Run Question A:
-
-Save: Save the code as PrimeServer.java and PrimeClient.java.
-
-Compile: Open a command prompt or terminal and navigate to the directory where you saved the files. Compile both files using the Java compiler:
-
-javac PrimeServer.java
-javac PrimeClient.java
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Cmd
-IGNORE_WHEN_COPYING_END
-
-Run Server: Open one command prompt/terminal and run the server:
-
-java PrimeServer
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Cmd
-IGNORE_WHEN_COPYING_END
-
-You should see the message: Server is running and waiting for client...
-
-Run Client: Open another command prompt/terminal and run the client:
-
-java PrimeClient
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Cmd
-IGNORE_WHEN_COPYING_END
-
-You will be prompted to enter a number. Enter a number and press Enter.
-
-See Result: The client terminal will display the response from the server (e.g., Server response: Prime or Server response: Not Prime).
 
 Question B: Bouncing Ball Applet with Random Colors
 
@@ -213,12 +160,6 @@ public class BouncingBallApplet extends Applet implements Runnable {
         ballColor = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
     }
 }
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Java
-IGNORE_WHEN_COPYING_END
 
 Steps to Run Question B:
 
@@ -302,31 +243,6 @@ public class SumNumbers
         Console.ReadKey(); // To keep the console window open until a key is pressed
     }
 }
-
-
-Steps to Run Question A in Visual Studio Code (or compatible .NET IDE):
-
-Save: Save the code as SumNumbers.cs.
-
-Open VS Code (or .NET IDE): Open Visual Studio Code (or your .NET development environment).
-
-Create a new C# project (if needed):
-
-If you are starting fresh, you might need to create a new project. Open a terminal in VS Code (View > Terminal) and navigate to the directory where you want to save your project.
-
-Run the command: dotnet new console -o SumNumbersApp and then cd SumNumbersApp. This will create a new console application project named "SumNumbersApp" in a folder of the same name. Replace the contents of Program.cs with the code above.
-
-If you just want to run a single .cs file, you can skip project creation and just ensure you have the .NET SDK installed.
-
-Navigate to the file: Make sure the SumNumbers.cs file is open in your editor.
-
-Run the program:
-
-Using the Terminal (if you created a project): In the terminal within VS Code (in the project directory), run the command: dotnet run
-
-Using Code Runner Extension (if you have it installed in VS Code): If you have the Code Runner extension installed in VS Code, you can right-click within the SumNumbers.cs file and select "Run Code".
-
-Input and Output: The program will prompt you to enter the first and second numbers in the console. After you enter both, it will display the sum.
 
 Question B: VB.NET Program for Teacher Table
 
