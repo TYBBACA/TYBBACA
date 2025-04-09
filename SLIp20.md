@@ -1,5 +1,6 @@
 Question 1A: JDBC Program to Delete Employee Details
 Solution:
+name the program as TempleAnimation.java
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -57,32 +58,23 @@ public class DeleteEmployee {
 
 Question 1B: Java Multithreading Applet for Drawing Temple
 Solution:
-import java.applet.Applet;
-import java.awt.Graphics;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
-public class TempleApplet extends Applet implements Runnable {
+public class TempleAnimation extends JPanel implements Runnable {
 
     private int flagX = 50; // Initial X position of the flag
     private Thread animationThread;
 
-    @Override
-    public void init() {
+    public TempleAnimation() {
         setBackground(Color.WHITE);
+        startAnimation();
     }
 
-    @Override
-    public void start() {
+    private void startAnimation() {
         if (animationThread == null) {
             animationThread = new Thread(this);
             animationThread.start();
-        }
-    }
-
-    @Override
-    public void stop() {
-        if (animationThread != null) {
-            animationThread = null; // Allow thread to stop
         }
     }
 
@@ -101,7 +93,9 @@ public class TempleApplet extends Applet implements Runnable {
     }
 
     @Override
-    public void paint(Graphics g) {
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Call the superclass method to ensure correct painting
+
         // Draw Temple Structure
         g.setColor(Color.GRAY);
         g.fillRect(50, 150, 100, 100); // Base of temple
@@ -115,6 +109,15 @@ public class TempleApplet extends Applet implements Runnable {
         g.fillRect(flagX, 40, 20, 10); // Flag pole
         g.setColor(Color.YELLOW);
         g.fillRect(flagX, 30, 20, 10); // Flag itself (yellow for visibility)
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Temple Animation");
+        TempleAnimation panel = new TempleAnimation();
+        frame.add(panel);
+        frame.setSize(300, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }
 
