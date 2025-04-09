@@ -1,6 +1,5 @@
 Question 1A: JDBC Program to Delete Employee Details
 Solution:
-name the program as TempleAnimation.java
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -58,6 +57,10 @@ public class DeleteEmployee {
 
 Question 1B: Java Multithreading Applet for Drawing Temple
 Solution:
+
+name the program as TempleAnimation.java
+java TempleAnimation.java
+
 import javax.swing.*;
 import java.awt.*;
 
