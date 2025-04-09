@@ -205,67 +205,85 @@ SLIP 1 A
 
 
 2vb
+Imports System.Data.SqlClient
 
-formvb=
-Write Code in btnSave_Click Event:
-Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-    Dim eno As Integer
-    Dim ename As String
-    Dim salary As Decimal
+Public Class Form1
 
-    ' Get values from TextBoxes
-    If Not Integer.TryParse(txtENO.Text, eno) Then
-        MessageBox.Show("Please enter a valid Employee Number (ENO).", "Input Error")
-        Return ' Exit the subroutine if ENO is not valid
-    End If
-    ename = txtEName.Text
-    If Not Decimal.TryParse(txtSalary.Text, salary) Then
-        MessageBox.Show("Please enter a valid Salary.", "Input Error")
-        Return ' Exit if Salary is not valid
-    End If
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim eno As Integer
+        Dim ename As String
+        Dim salary As Decimal
 
-    ' **Database Connection String** (Modify this to your LocalDB connection)
-    Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;AttachDbFilename=|DataDirectory|\EmployeeDB.mdf;Initial Catalog=EmployeeDB;"
+        If Not Integer.TryParse(txtENO.Text, eno) Then
+            MessageBox.Show("Please enter a valid Employee Number (ENO).", "Input Error")
+            Return
+        End If
 
-    Using connection As New SqlConnection(connectionString)
-        Try
-            connection.Open()
+        ename = txtEName.Text
 
-            ' **Create Database and Table if they don't exist (First time run)**
-            Dim createDbCommand As New SqlCommand("IF NOT EXISTS (SELECT name FROM master.databases WHERE name = 'EmployeeDB') CREATE DATABASE EmployeeDB;", connection)
-            createDbCommand.ExecuteNonQuery()
-            connection.ChangeDatabase("EmployeeDB") ' Switch to the newly created database
+        If Not Decimal.TryParse(txtSalary.Text, salary) Then
+            MessageBox.Show("Please enter a valid Salary.", "Input Error")
+            Return
+        End If
 
-            Dim createTableCommand As New SqlCommand("IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Employee') CREATE TABLE Employee (ENO INT PRIMARY KEY, EName VARCHAR(255), Salary DECIMAL(10, 2));", connection)
-            createTableCommand.ExecuteNonQuery()
+        Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;AttachDbFilename=|DataDirectory|\EmployeeDB.mdf;Initial Catalog=EmployeeDB;"
 
+        Using connection As New SqlConnection(connectionString)
+            Try
+                connection.Open()
 
-            ' **Insert Data into Employee Table**
-            Dim insertQuery As String = "INSERT INTO Employee (ENO, EName, Salary) VALUES (@ENO, @EName, @Salary)"
-            Using command As New SqlCommand(insertQuery, connection)
-                command.Parameters.AddWithValue("@ENO", eno)
-                command.Parameters.AddWithValue("@EName", ename)
-                command.Parameters.AddWithValue("@Salary", salary)
-                command.ExecuteNonQuery()
-                MessageBox.Show("Employee data saved successfully!", "Success")
+                Dim createDbCommand As New SqlCommand("IF NOT EXISTS (SELECT name FROM master.databases WHERE name = 'EmployeeDB') CREATE DATABASE EmployeeDB;", connection)
+                createDbCommand.ExecuteNonQuery()
+                connection.ChangeDatabase("EmployeeDB")
 
-                ' **Refresh GridView after saving**
-                LoadEmployeeData()
+                Dim createTableCommand As New SqlCommand("IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Employee') CREATE TABLE Employee (ENO INT PRIMARY KEY, EName VARCHAR(255), Salary DECIMAL(10, 2));", connection)
+                createTableCommand.ExecuteNonQuery()
 
-                ' **Clear TextBoxes (Optional)**
-                txtENO.Clear()
-                txtEName.Clear()
-                txtSalary.Clear()
-            End Using
+                Dim insertQuery As String = "INSERT INTO Employee (ENO, EName, Salary) VALUES (@ENO, @EName, @Salary)"
+                Using command As New SqlCommand(insertQuery, connection)
+                    command.Parameters.AddWithValue("@ENO", eno)
+                    command.Parameters.AddWithValue("@EName", ename)
+                    command.Parameters.AddWithValue("@Salary", salary)
+                    command.ExecuteNonQuery()
+                    MessageBox.Show("Employee data saved successfully!", "Success")
+                    LoadEmployeeData()
+                    txtENO.Clear()
+                    txtEName.Clear()
+                    txtSalary.Clear()
+                End Using
 
-        Catch ex As Exception
-            MessageBox.Show("Error saving data: " & ex.Message, "Database Error")
-        Finally
-            connection.Close() ' Ensure connection is closed
-        End Try
-    End Using
-End Sub
+            Catch ex As Exception
+                MessageBox.Show("Error saving data: " & ex.Message, "Database Error")
+            Finally
+                connection.Close()
+            End Try
+        End Using
+    End Sub
 
+    Private Sub LoadEmployeeData()
+        Dim connectionString As String = "Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;AttachDbFilename=|DataDirectory|\EmployeeDB.mdf;Initial Catalog=EmployeeDB;"
+
+        Using connection As New SqlConnection(connectionString)
+            Try
+                connection.Open()
+                Dim query As String = "SELECT ENO, EName, Salary FROM Employee"
+                Using adapter As New SqlDataAdapter(query, connection)
+                    Dim employeeDataTable As New DataTable()
+                    adapter.Fill(employeeDataTable)
+                    dgvEmployee.DataSource = employeeDataTable
+                End Using
+            Catch ex As Exception
+                MessageBox.Show("Error loading employee data: " & ex.Message, "Database Error")
+            Finally
+                connection.Close()
+            End Try
+        End Using
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadEmployeeData()
+    End Sub
+End Class
 
 Create LoadEmployeeData Subroutine to Display in GridView: Add this subroutine within your Form1 class (but outside any event handlers):
 Private Sub LoadEmployeeData()
